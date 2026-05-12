@@ -3,7 +3,7 @@ use ieee.std_logic_1164.all;
 
 entity blink is
     generic(
-        s   : positive range 1 to 3 := 3;
+        s   : positive range 1 to 3 := 1;
         top : positive := 1000000 
     );
     port(
@@ -13,7 +13,7 @@ entity blink is
 end entity;
 
 architecture rtl of blink is
-    signal led_q : std_logic_vector(s-1 downto 0) := "101";
+    signal led_q : std_logic_vector(s-1 downto 0) := (others => '0');
 begin
 
     process(clk)

@@ -17,6 +17,7 @@ CHIPDB ?= build/chipdb
 CHIPDB_FILE := $(CHIPDB)/$(DBPART).bin
 
 JSON := $(BUILD_DIR)/$(PROJECT).json
+YOSYS_REPORT := $(BUILD_DIR)/$(PROJECT)_yosys.rpt
 ROUTED_JSON := $(BUILD_DIR)/$(PROJECT)_routed.json
 FASM := $(BUILD_DIR)/$(PROJECT).fasm
 FRAMES := $(BUILD_DIR)/$(PROJECT).frames
@@ -42,6 +43,7 @@ help:
 	@echo "Key variables:"
 	@echo "  SRC_DIR=<dir>            Source directory containing .vhd/.vhdl and .xdc"
 	@echo "  TOP=<entity>             Top-level VHDL entity (default: directory name)"
+	@echo "  YOSYS_REPORT=<path>      Synthesis resource report file (default: $(YOSYS_REPORT))"
 	@echo "  PART=<part>              FPGA part (default: xc7a35tcpg236-1)"
 	@echo "  BOARD=<board>            openFPGALoader board name (default: cmoda7-35t)"
 
@@ -61,7 +63,7 @@ $(BUILD_DIR):
 	mkdir -p $@
 
 $(JSON): $(VHDL_SRCS) | $(BUILD_DIR)
-	yosys -m ghdl -p "ghdl --std=08 $(VHDL_SRCS) -e $(TOP); synth_xilinx -flatten -abc9 -arch xc7 -top $(TOP); write_json $@"
+	yosys -m ghdl -p "ghdl --std=08 $(VHDL_SRCS) -e $(TOP); synth_xilinx -flatten -abc9 -arch xc7 -top $(TOP); tee -o $(YOSYS_REPORT) stat -tech xilinx; write_json $@"
 
 $(CHIPDB_FILE): | $(BUILD_DIR)
 	mkdir -p $(dir $@)

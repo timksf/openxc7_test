@@ -10,8 +10,14 @@ set_property IOSTANDARD LVCMOS33 [get_ports led[0]]
 set_property PACKAGE_PIN C16 [get_ports led[1]] ##IO_L13P_T2_MRCC_16 Sch=led[2]
 set_property IOSTANDARD LVCMOS33 [get_ports led[1]]
 
-set_property PACKAGE_PIN B17 [get_ports led[2]] ##IO_L14N_T2_SRCC_16 Sch=led0_b
-set_property IOSTANDARD LVCMOS33 [get_ports led[2]]
+set_property PACKAGE_PIN B17 [get_ports rgb[0]] ##IO_L14N_T2_SRCC_16 Sch=led0_b
+set_property IOSTANDARD LVCMOS33 [get_ports rgb[0]]
+
+set_property PACKAGE_PIN B16 [get_ports rgb[1]] ##IO_L13N_T2_MRCC_16 Sch=led0_g
+set_property IOSTANDARD LVCMOS33 [get_ports rgb[1]]
+
+set_property PACKAGE_PIN C17 [get_ports rgb[2]] ##IO_L14P_T2_SRCC_16 Sch=led0_r
+set_property IOSTANDARD LVCMOS33 [get_ports rgb[2]]
 
 #set_property -dict { PACKAGE_PIN B17   IOSTANDARD LVCMOS33 } [get_ports { led_b}]; #IO_L14N_T2_SRCC_16 Sch=led0_b
 #set_property -dict { PACKAGE_PIN B16   IOSTANDARD LVCMOS33 } [get_ports { led_g }]; #IO_L13N_T2_MRCC_16 Sch=led0_g
