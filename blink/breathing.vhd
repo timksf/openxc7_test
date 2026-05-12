@@ -25,21 +25,21 @@ begin
     process(clk)
         variable step_counter_v : integer range 0 to step_ticks - 1 := 0;
     begin
-        if rising_edge(clk) then
+        if(rising_edge(clk)) then
             pwm_counter_q <= pwm_counter_q + 1;
 
-            if step_counter_v = step_ticks - 1 then
+            if(step_counter_v = step_ticks - 1) then
                 step_counter_v := 0;
 
-                if ramp_up_q = '1' then
-                    if brightness_q = max_brightness_c then
+                if(ramp_up_q = '1') then
+                    if(brightness_q = max_brightness_c) then
                         ramp_up_q <= '0';
                         brightness_q <= brightness_q - 1;
                     else
                         brightness_q <= brightness_q + 1;
                     end if;
                 else
-                    if brightness_q = 0 then
+                    if(brightness_q = 0) then
                         ramp_up_q <= '1';
                         brightness_q <= brightness_q + 1;
                     else
