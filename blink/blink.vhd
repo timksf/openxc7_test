@@ -7,7 +7,7 @@ entity blink is
         top : positive := 1000000 
     );
     port(
-        sysclk: in std_logic;
+        clk: in std_logic;
         led: out std_logic_vector(s-1 downto 0)
     );
 end entity;
@@ -16,10 +16,10 @@ architecture rtl of blink is
     signal led_q : std_logic_vector(s-1 downto 0) := "101";
 begin
 
-    process(sysclk)
+    process(clk)
         variable cnt_v : integer range 0 to top := 0;
     begin
-        if(rising_edge(sysclk)) then
+        if(rising_edge(clk)) then
             if(cnt_v = top) then
                 cnt_v := 0;
                 led_q <= not led_q;
